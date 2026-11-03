@@ -1,0 +1,32 @@
+server:
+  # Web 服务端口
+  port: 8080
+
+#  servlet:
+#    # 应用上下文路径
+#    context-path: /greenhouse-web
+
+spring:
+  application:
+    name: Agricultural-System
+
+  # MySQL 数据源
+  datasource:
+    url: jdbc:mysql://localhost:3306/greenhouse?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: greenhouse_user
+    password: "greenhouse_pass"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Redis 配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 3000ms
+
+# MyBatis 配置
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

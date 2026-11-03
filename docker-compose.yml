@@ -1,0 +1,35 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: agri-inventory-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: greenhouse
+      MYSQL_USER: greenhouse_user
+      MYSQL_PASSWORD: greenhouse_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - agri-mysql-data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+
+
+  redis:
+    image: redis:7
+    container_name: agri-inventory-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - agri-redis-data:/data
+    command: redis-server --appendonly yes
+
+
+volumes:
+  agri-mysql-data:
+  agri-redis-data:
